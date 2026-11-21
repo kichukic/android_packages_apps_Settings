@@ -41,6 +41,7 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
+import androidx.preference.ListPreference;
 import androidx.preference.PreferenceScreen;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
@@ -223,6 +224,32 @@ public class ColorModePreferenceFragment extends RadioButtonPickerFragment {
             mViewPager.setCurrentItem(mPageList.size() - 1, true);
         }
         updateIndicator(mViewPager.getCurrentItem());
+    }
+
+
+    @Override
+    public void updateCandidates() {
+        super.updateCandidates();
+        PreferenceScreen screen = getPreferenceScreen();
+        if (screen != null && ColorDisplayManager.isColorTransformAccelerated(screen.getContext())) {
+            getPreferenceManager().inflateFromResource(screen.getContext(), R.xml.color_mode_settings,
+                    screen);
+            setupDisplayEnginePreference(screen);
+        }
+    }
+
+    private void setupDisplayEnginePreference(PreferenceScreen screen) {
+        final ListPreference pref = screen.findPreference("display_engine_mode");
+        if (pref != null) {
+            final ContentResolver cr = screen.getContext().getContentResolver();
+            final int currentMode = Secure.getInt(cr, "display_engine_mode", 0);
+            pref.setValue(String.valueOf(currentMode));
+            pref.setOnPreferenceChangeListener((preference, newValue) -> {
+                final int val = Integer.parseInt((String) newValue);
+                Secure.putInt(cr, "display_engine_mode", val);
+                return true;
+            });
+        }
     }
 
     @Override
