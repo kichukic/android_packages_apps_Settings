@@ -4,7 +4,39 @@
     <string name="kic_glass_shade_summary">Translucent acrylic-blur style for the notification shade and quick settings</string>
     <!-- KIC Mods -->
     <string name="kic_mods_title">KIC Mods</string>
-    <string name="kic_mods_summary">Reality Engine, unlimited Google Photos, status bar customizations</string>
+    <string name="kic_mods_summary">PIF, Hardware Keybox, Reality Engine, unlimited Google Photos</string>
+    <!-- Play Integrity & Keybox -->
+    <string name="kic_mods_integrity_category">Play Integrity &amp; Keybox</string>
+    <string name="kic_pif_enabled_title">Play Integrity spoofing</string>
+    <string name="kic_pif_enabled_summary">Spoof build properties and device fingerprint for Play Integrity attestation</string>
+    <string name="kic_pif_import_title">Load Play Integrity (pif.json)</string>
+    <string name="kic_pif_import_summary">Import custom pif.json or pif.prop from storage</string>
+    <string name="kic_pif_custom_loaded">Custom PIF profile active</string>
+    <string name="kic_pif_default_active">Default KIC OS profile active</string>
+    <string name="kic_pif_reset_title">Reset PIF to default</string>
+    <string name="kic_pif_reset_summary">Restore stock KIC OS Play Integrity configuration</string>
+    <string name="kic_pif_reset_confirm">Reset Play Integrity profile to stock KIC OS configuration?</string>
+    <string name="kic_pif_import_success">PIF profile imported successfully</string>
+    <string name="kic_pif_import_failed">Failed to read or import PIF profile</string>
+    <string name="kic_pif_reset_success">PIF profile reset to default</string>
+    <string name="kic_pif_empty_error">Selected PIF file is empty</string>
+
+    <string name="kic_keybox_enabled_title">Hardware Keybox attestation</string>
+    <string name="kic_keybox_enabled_summary">Hardware-backed keybox attestation for strong integrity verdict</string>
+    <string name="kic_keybox_import_title">Load Hardware Keybox (keybox.xml)</string>
+    <string name="kic_keybox_import_summary">Import custom keybox.xml from storage</string>
+    <string name="kic_keybox_custom_loaded">Custom keybox active</string>
+    <string name="kic_keybox_default_active">Default KIC OS keybox active</string>
+    <string name="kic_keybox_reset_title">Reset Keybox to default</string>
+    <string name="kic_keybox_reset_summary">Restore stock KIC OS Hardware Keybox</string>
+    <string name="kic_keybox_reset_confirm">Reset Hardware Keybox to stock KIC OS configuration?</string>
+    <string name="kic_keybox_import_success">Hardware Keybox imported successfully</string>
+    <string name="kic_keybox_import_failed">Failed to read or import Hardware Keybox</string>
+    <string name="kic_keybox_reset_success">Hardware Keybox reset to default</string>
+    <string name="kic_keybox_empty_error">Selected Keybox file is empty</string>
+    <string name="kic_keybox_invalid_error">Invalid Keybox XML format (missing &lt;AndroidAttestationKeyBox&gt;)</string>
+
+    <!-- Media & Visuals -->
     <string name="kic_mods_media_category">Visuals &amp; Media</string>
     <string name="kic_gphotos_spoof_title">Google Photos unlimited storage</string>
     <string name="kic_gphotos_spoof_summary">Spoof device as Pixel XL (marlin) for unlimited original quality backup</string>
