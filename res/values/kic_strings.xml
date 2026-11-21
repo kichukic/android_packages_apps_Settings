@@ -2,4 +2,19 @@
 <resources>
     <string name="kic_glass_shade_title">Glass notification shade</string>
     <string name="kic_glass_shade_summary">Translucent acrylic-blur style for the notification shade and quick settings</string>
+    <!-- KIC Mods -->
+    <string name="kic_mods_title">KIC Mods</string>
+    <string name="kic_mods_summary">Reality Engine, unlimited Google Photos, status bar customizations</string>
+    <string name="kic_mods_media_category">Visuals &amp; Media</string>
+    <string name="kic_gphotos_spoof_title">Google Photos unlimited storage</string>
+    <string name="kic_gphotos_spoof_summary">Spoof device as Pixel XL (marlin) for unlimited original quality backup</string>
+    <string name="kic_reality_display_title">Reality Display Engine</string>
+    <string name="kic_reality_display_summary">Sony X-Reality, Vivid, and Triluminos display enhancement</string>
+    <string name="kic_mods_statusbar_category">Status Bar &amp; Interface</string>
+    <string name="kic_status_bar_title">Status bar</string>
+    <string name="kic_status_bar_summary">Network traffic monitor, battery styles, status bar icons</string>
+    <string name="kic_mods_system_category">Hardware &amp; Gestures</string>
+    <string name="kic_buttons_title">Buttons</string>
+    <string name="kic_gestures_title">Touchscreen gestures</string>
+    <string name="kic_charging_title">Charging control</string>
 </resources>

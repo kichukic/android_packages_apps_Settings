@@ -46,6 +46,20 @@
         </Preference>
     </PreferenceCategory>
 
+    
+    <PreferenceCategory
+        android:key="kic_mods_category"
+        android:title="@string/kic_mods_title"
+        android:order="-395">
+
+        <Preference
+            android:key="kic_mods_settings_pref"
+            android:title="@string/kic_mods_title"
+            android:summary="@string/kic_mods_summary"
+            android:icon="@drawable/ic_settings_kic_mods_filled"
+            android:fragment="com.android.settings.kic.KicModsFragment" />
+    </PreferenceCategory>
+
     <PreferenceCategory
         android:key="languages_input_category"
         android:title="@string/language_settings"

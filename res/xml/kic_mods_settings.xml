@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:key="kic_mods_screen"
+    android:title="@string/kic_mods_title">
+
+    <PreferenceCategory
+        android:key="kic_mods_media_category"
+        android:title="@string/kic_mods_media_category">
+
+        <SwitchPreferenceCompat
+            android:key="kic_gphotos_spoof"
+            android:title="@string/kic_gphotos_spoof_title"
+            android:summary="@string/kic_gphotos_spoof_summary"
+            settings:controller="com.android.settings.kic.GPhotosSpoofPreferenceController" />
+
+        <Preference
+            android:key="kic_reality_display"
+            android:title="@string/kic_reality_display_title"
+            android:summary="@string/kic_reality_display_summary"
+            android:fragment="com.android.settings.display.ColorModePreferenceFragment" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="kic_mods_statusbar_category"
+        android:title="@string/kic_mods_statusbar_category">
+
+        <lineageos.preference.LineagePartsPreference
+            android:key="status_bar_settings"
+            android:title="@string/kic_status_bar_title"
+            android:summary="@string/kic_status_bar_summary" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="kic_mods_system_category"
+        android:title="@string/kic_mods_system_category">
+
+        <lineageos.preference.LineagePartsPreference
+            android:key="button_settings"
+            android:title="@string/kic_buttons_title" />
+
+        <lineageos.preference.LineagePartsPreference
+            android:key="touchscreen_gesture_settings"
+            android:title="@string/kic_gestures_title" />
+
+        <lineageos.preference.LineagePartsPreference
+            android:key="charging_control"
+            android:title="@string/kic_charging_title" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

@@ -137,6 +137,16 @@
             settings:highlightableMenuKey="@string/menu_key_battery"
             settings:controller="com.android.settings.fuelgauge.TopLevelBatteryPreferenceController"/>
 
+        
+        <com.android.settings.widget.HomepagePreference
+            android:fragment="com.android.settings.kic.KicModsFragment"
+            android:icon="@drawable/ic_homepage_kic_mods"
+            android:key="top_level_kic_mods"
+            android:order="-25"
+            android:title="@string/kic_mods_title"
+            android:summary="@string/kic_mods_summary"
+            settings:highlightableMenuKey="@string/menu_key_kic_mods"
+            settings:controller="com.android.settings.kic.TopLevelKicModsPreferenceController"/>
         <com.android.settings.widget.HomepagePreference
             android:fragment="com.android.settings.system.SystemDashboardFragment"
             android:icon="@drawable/ic_homepage_system_dashboard"
