@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="kic_glass_shade_title">Glass notification shade</string>
+    <string name="kic_glass_shade_summary">Translucent acrylic-blur style for the notification shade and quick settings</string>
+</resources>
