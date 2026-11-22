@@ -15,6 +15,12 @@
             android:summary="@string/kic_pif_enabled_summary"
             android:defaultValue="true" />
 
+        <ListPreference
+            android:key="kic_pif_device_picker"
+            android:title="@string/kic_pif_device_picker_title"
+            android:summary="@string/kic_pif_device_picker_summary"
+            android:dialogTitle="@string/kic_pif_device_picker_title" />
+
         <Preference
             android:key="kic_pif_import"
             android:title="@string/kic_pif_import_title"

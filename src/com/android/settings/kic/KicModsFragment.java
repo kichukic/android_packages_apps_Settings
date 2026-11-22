@@ -16,8 +16,12 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.SwitchPreferenceCompat;
+
+import com.android.internal.util.android.PixelDeviceRepository;
+import org.json.JSONObject;
 
 import com.android.settings.R;
 import com.android.settings.dashboard.DashboardFragment;
@@ -42,6 +46,7 @@ public class KicModsFragment extends DashboardFragment implements Preference.OnP
     private static final int REQUEST_CODE_KEYBOX = 1002;
 
     private static final String KEY_PIF_ENABLED = "kic_pif_enabled";
+    private static final String KEY_PIF_DEVICE_PICKER = "kic_pif_device_picker";
     private static final String KEY_PIF_IMPORT = "kic_pif_import";
     private static final String KEY_PIF_RESET = "kic_pif_reset";
 
@@ -57,6 +62,7 @@ public class KicModsFragment extends DashboardFragment implements Preference.OnP
 
     private SwitchPreferenceCompat mPifSwitch;
     private SwitchPreferenceCompat mKeyboxSwitch;
+    private ListPreference mPifDevicePicker;
     private Preference mPifImportPref;
     private Preference mKeyboxImportPref;
 
@@ -89,8 +95,68 @@ public class KicModsFragment extends DashboardFragment implements Preference.OnP
             mKeyboxSwitch.setOnPreferenceChangeListener(this);
         }
 
+        mPifDevicePicker = findPreference(KEY_PIF_DEVICE_PICKER);
+        if (mPifDevicePicker != null) {
+            setupPifDevicePicker();
+        }
         mPifImportPref = findPreference(KEY_PIF_IMPORT);
         mKeyboxImportPref = findPreference(KEY_KEYBOX_IMPORT);
+    }
+
+    private void setupPifDevicePicker() {
+        Context ctx = getContext();
+        if (ctx == null) return;
+        List<PixelDeviceRepository.PixelProfile> profiles = PixelDeviceRepository.getProfiles(ctx);
+        if (profiles != null && !profiles.isEmpty()) {
+            CharSequence[] entries = new CharSequence[profiles.size()];
+            CharSequence[] values = new CharSequence[profiles.size()];
+            for (int i = 0; i < profiles.size(); i++) {
+                PixelDeviceRepository.PixelProfile p = profiles.get(i);
+                entries[i] = p.model + " (" + p.codename + ")";
+                values[i] = p.codename;
+            }
+            mPifDevicePicker.setEntries(entries);
+            mPifDevicePicker.setEntryValues(values);
+            mPifDevicePicker.setOnPreferenceChangeListener((preference, newValue) -> {
+                String codename = (String) newValue;
+                applyPifProfile(ctx, codename);
+                return true;
+            });
+        }
+    }
+
+    private void applyPifProfile(Context ctx, String codename) {
+        PixelDeviceRepository.PixelProfile p = PixelDeviceRepository.getProfileByCodename(ctx, codename, false);
+        if (p == null) return;
+        try {
+            JSONObject json = new JSONObject();
+            json.put("PRODUCT", p.product);
+            json.put("DEVICE", p.device);
+            json.put("MANUFACTURER", "Google");
+            json.put("BRAND", "google");
+            json.put("MODEL", p.model);
+            json.put("FINGERPRINT", p.fingerprint);
+            json.put("SECURITY_PATCH", p.securityPatch);
+            json.put("DEVICE_INITIAL_SDK_INT", PixelDeviceRepository.getInitialSdkInt(p.device));
+            Settings.Secure.putString(ctx.getContentResolver(), SETTING_SPOOF_PIF_CONFIG, json.toString(2));
+            if (mPifDevicePicker != null) {
+                mPifDevicePicker.setSummary(p.model + " (" + p.codename + ")");
+                mPifDevicePicker.setValue(p.codename);
+            }
+            if (mPifImportPref != null) {
+                mPifImportPref.setSummary("Active: " + p.model);
+            }
+            Toast.makeText(ctx, "Play Integrity set to " + p.model, Toast.LENGTH_SHORT).show();
+            try {
+                android.app.ActivityManager am = (android.app.ActivityManager) ctx.getSystemService(Context.ACTIVITY_SERVICE);
+                if (am != null) {
+                    am.killBackgroundProcesses("com.google.android.gms");
+                    am.killBackgroundProcesses("com.google.android.gms.unstable");
+                }
+            } catch (Exception ignored) {}
+        } catch (Exception e) {
+            Log.e(TAG, "Failed to apply PIF profile", e);
+        }
     }
 
     @Override
@@ -117,6 +183,20 @@ public class KicModsFragment extends DashboardFragment implements Preference.OnP
 
         if (mPifImportPref != null) {
             String pif = Settings.Secure.getString(ctx.getContentResolver(), SETTING_SPOOF_PIF_CONFIG);
+            String pifModel = null;
+            if (!TextUtils.isEmpty(pif)) {
+                try {
+                    JSONObject obj = new JSONObject(pif);
+                    pifModel = obj.optString("MODEL", null);
+                } catch (Exception ignored) {}
+            }
+            if (mPifDevicePicker != null) {
+                if (!TextUtils.isEmpty(pifModel)) {
+                    mPifDevicePicker.setSummary(pifModel);
+                } else {
+                    mPifDevicePicker.setSummary(R.string.kic_pif_device_picker_summary);
+                }
+            }
             if (!TextUtils.isEmpty(pif)) {
                 mPifImportPref.setSummary(getString(R.string.kic_pif_custom_loaded));
             } else {

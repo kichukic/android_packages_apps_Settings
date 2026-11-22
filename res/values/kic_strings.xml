@@ -10,6 +10,8 @@
     <string name="kic_mods_integrity_category">Play Integrity &amp; Keybox</string>
     <string name="kic_pif_enabled_title">Play Integrity spoofing</string>
     <string name="kic_pif_enabled_summary">Spoof build properties and device fingerprint for Play Integrity attestation</string>
+    <string name="kic_pif_device_picker_title">Play Integrity device profile</string>
+    <string name="kic_pif_device_picker_summary">Select official Google Pixel fingerprint to spoof for Play Integrity</string>
     <string name="kic_pif_import_title">Load Play Integrity (pif.json)</string>
     <string name="kic_pif_import_summary">Import custom pif.json or pif.prop from storage</string>
     <string name="kic_pif_custom_loaded">Custom PIF profile active</string>
