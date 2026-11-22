@@ -393,9 +393,7 @@ public class TopLevelSettings extends DashboardFragment implements SplitLayoutLi
             return R.xml.top_level_settings_expressive_desktop;
         }
 
-        return SettingsThemeHelper.isExpressiveTheme(context)
-                ? R.xml.top_level_settings_expressive
-                : R.xml.top_level_settings;
+        return R.xml.top_level_settings_expressive;
     }
 
     public static final BaseSearchIndexProvider SEARCH_INDEX_DATA_PROVIDER =

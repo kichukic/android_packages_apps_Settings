@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2026 The KIC OS Project
+  SPDX-License-Identifier: Apache-2.0
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="960"
+    android:viewportHeight="960"
+    android:tint="?android:attr/colorControlNormal">
+    <path
+        android:fillColor="@android:color/white"
+        android:pathData="M480,880L432,608L160,560L432,512L480,240L528,512L800,560L528,608L480,880ZM700,380L676,244L540,220L676,196L700,60L724,196L860,220L724,244L700,380ZM240,380L222,278L120,260L222,242L240,140L258,242L360,260L258,278L240,380Z"/>
+</vector>

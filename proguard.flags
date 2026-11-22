@@ -80,3 +80,6 @@
 
 # Keep the device state AppFunction schema
 -keep class com.google.android.appfunctions.schema.common.v1.devicestate.** { *; }
+
+# Keep all KIC Settings classes
+-keep,allowoptimization,allowaccessmodification class com.kic.settings.** { *; }

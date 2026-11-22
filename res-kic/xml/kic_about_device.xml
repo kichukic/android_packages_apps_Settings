@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2025 OrionOS Project
+  Copyright (C) 2026 The KIC OS Project
+  SPDX-License-Identifier: Apache-2.0
+-->
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:title="@string/about_settings"
+    settings:keywords="@string/keywords_top_level_device_info">
+    
+    <!-- KIC OS Branding Banner -->
+    <com.kic.settings.about.BrandBannerPreference
+        android:key="brand_banner"
+        android:selectable="false"
+        android:layout="@layout/brand_header_about" />
+
+    <!-- Maintainer Card (Kishor) -->
+    <Preference
+        android:key="maintainer_kic"
+        android:title="@string/kic_maintainer_title"
+        android:summary="@string/summary_placeholder"
+        android:layout="@layout/kic_about_card_maintainer"
+        settings:controller="com.kic.settings.about.MaintainerPreferenceController" />
+
+    <!-- About phone info header (Hardware Specs: SoC, RAM, Battery, Display) -->
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="about_phone_info_header"
+        android:layout="@layout/about_phone_info_header"
+        android:selectable="false" />
+
+    <!-- About phone info footer (Security & SELinux Enforcing) -->
+    <com.android.settingslib.widget.LayoutPreference
+        android:key="about_phone_info_footer"
+        android:layout="@layout/about_phone_footer"
+        android:selectable="false" />
+
+    <!-- Android version -->
+    <Preference
+        android:key="os_firmware_version"
+        android:title="@string/firmware_version"
+        android:summary="@string/summary_placeholder"
+        settings:enableCopying="true"
+        settings:searchable="false"
+        android:layout="@layout/kic_about_card_top"
+        settings:controller="com.android.settings.deviceinfo.firmwareversion.FirmwareVersionDetailPreferenceController" />
+
+    <!-- Baseband -->
+    <Preference
+        android:key="base_band"
+        android:title="@string/baseband_version"
+        android:summary="@string/summary_placeholder"
+        settings:enableCopying="true"
+        android:layout="@layout/kic_about_card_middle"
+        settings:controller="com.android.settings.deviceinfo.firmwareversion.BasebandVersionPreferenceController"/>
+
+    <!-- Kernel -->
+    <Preference
+        android:key="kernel_version"
+        android:title="@string/kernel_version"
+        android:summary="@string/summary_placeholder"
+        settings:enableCopying="true"
+        android:layout="@layout/kic_about_card_middle"
+        settings:controller="com.android.settings.deviceinfo.firmwareversion.KernelVersionPreferenceController"/>
+
+    <!-- Build Number -->
+    <Preference
+        android:key="os_build_number"
+        android:title="@string/build_number"
+        android:summary="@string/summary_placeholder"
+        settings:enableCopying="true"
+        android:layout="@layout/kic_about_card_bottom"
+        settings:controller="com.android.settings.deviceinfo.firmwareversion.SimpleBuildNumberPreferenceController"/>
+
+</PreferenceScreen>

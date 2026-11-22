@@ -430,7 +430,7 @@ public class SettingsBaseActivity extends FragmentActivity implements CategoryHa
     @Override
     public boolean isExpressiveDesignEnabled() {
         if (!WizardManagerHelper.isAnySetupWizard(getIntent())) {
-            return SettingsThemeHelper.isExpressiveDesignEnabled();
+            return true;
         }
 
         return SystemProperties.get(SETUPWIZARD_THEME_PROP).startsWith(SETUPWIZARD_THEME_PREFIX);

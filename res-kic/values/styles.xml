@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2025 OrionOS Project
+  Copyright (C) 2026 The KIC OS Project
+  SPDX-License-Identifier: Apache-2.0
+-->
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="orion_about_cardview_text_primary">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/orion_text_dynamic</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="orion_about_cardview_text_secondary">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/orion_text_secondary_dynamic</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="orion_about_cardview_sepatch_text_primary">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/material_dynamic_tertiary50</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="orion_about_cardview_sepatch_text_secondary">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/material_dynamic_tertiary40</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="orion_about_icon">
+        <item name="android:textColor">@color/orion_icon_dynamic</item>
+        <item name="android:textSize">25sp</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="orion_about_icon_sepatch">
+        <item name="android:textColor">@color/material_dynamic_tertiary40</item>
+        <item name="android:textSize">25sp</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+</resources>

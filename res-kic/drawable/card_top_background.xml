@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2025 OrionOS Project
+  Copyright (C) 2026 The KIC OS Project
+  SPDX-License-Identifier: Apache-2.0
+-->
+<shape android:shape="rectangle"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/card_background_surface" />
+    <corners
+        android:topLeftRadius="@dimen/orion_card_radius"
+        android:topRightRadius="@dimen/orion_card_radius" />
+</shape>

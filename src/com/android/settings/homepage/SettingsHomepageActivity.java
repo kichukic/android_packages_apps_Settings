@@ -79,6 +79,7 @@ import com.android.settings.safetycenter.SafetyCenterManagerWrapper;
 import com.android.settingslib.Utils;
 import com.android.settingslib.core.lifecycle.HideNonSystemOverlayMixin;
 import com.android.settingslib.widget.SettingsThemeHelper;
+import com.android.settingslib.widget.ExpressiveDesignEnabledProvider;
 
 import com.google.android.setupcompat.util.WizardManagerHelper;
 
@@ -88,7 +89,12 @@ import java.util.Set;
 
 /** Settings homepage activity */
 public class SettingsHomepageActivity extends FragmentActivity implements
-        CategoryMixin.CategoryHandler {
+        CategoryMixin.CategoryHandler, ExpressiveDesignEnabledProvider {
+    @Override
+    public boolean isExpressiveDesignEnabled() {
+        return true;
+    }
+
 
     private static final String TAG = "SettingsHomepageActivity";
 

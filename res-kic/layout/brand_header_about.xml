@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2025 OrionOS Project
+  Copyright (C) 2026 The KIC OS Project
+  SPDX-License-Identifier: Apache-2.0
+-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginHorizontal="@dimen/orion_card_side_margin"
+    android:layout_marginTop="@dimen/orion_vertical_padding"
+    android:layout_marginBottom="@dimen/orion_vertical_padding"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:paddingHorizontal="@dimen/orion_cool_branding_half_height"
+    android:paddingVertical="@dimen/orion_cool_branding_half_height"
+    android:background="@drawable/about_header_background_ripple">
+
+    <ImageView
+        android:id="@+id/banner_logo"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:src="@drawable/ic_kic_banner_logo"
+        android:tint="@color/orion_banner_dynamic"
+        android:layout_marginEnd="14dp"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/banner_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/orion_banner_dynamic"
+            android:fontFamily="sans-serif-condensed"
+            tools:text="KIC OS 24.0"/>
+
+        <TextView
+            android:id="@+id/banner_subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textColor="@color/orion_banner_dynamic"
+            android:alpha="0.8"
+            tools:text="Android 17 | haydn"/>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Copyright (C) 2025 OrionOS Project
+  Copyright (C) 2026 The KIC OS Project
+  SPDX-License-Identifier: Apache-2.0
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- KIC OS Branding -->
+    <string name="kic_banner_title_format">KIC OS %1$s</string>
+    <string name="keywords_top_level_device_info">about phone, kic, device name, specs</string>
+    <string name="orion_build_status_title">Build status</string>
+    <string name="orion_cpu_title">Processor</string>
+    <string name="orion_device_title">Device</string>
+    <string name="orion_memory_storage_title">Memory</string>
+    <string name="orion_battery_size_title">Battery Capacity</string>
+    <string name="orion_screen_res_title">Screen Resolution</string>
+    <string name="orion_secpatch_title">Security Patch</string>
+
+    <string name="kic_memory_storage_summary">%1$sGB ROM + %2$dGB RAM</string>
+    <string name="kic_battery_summary">%1$d mAh</string>
+
+    <!-- Maintainer -->
+    <string name="kic_maintainer_title">Maintainer</string>
+    <string name="kic_maintainer_default">Kishor</string>
+
+    <!-- SELinux Status -->
+    <string name="orion_selinux_title">SELinux status</string>
+    <string name="selinux_status_permissive">Permissive</string>
+    <string name="selinux_status_enforcing">Enforcing</string>
+
+    <!-- Top Level Categories -->
+    <string name="top_level_connectivity">Connectivity</string>
+    <string name="top_level_personalize">Personalize</string>
+    <string name="top_level_security" translatable="false">@string/security_settings_title</string>
+    <string name="top_level_accessibility_wellbeing">Accessibility &amp; Wellbeing</string>
+    <string name="top_level_system">System &amp; Device</string>
+    <string name="top_level_info">Information</string>
+</resources>
