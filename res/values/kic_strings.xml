@@ -82,4 +82,16 @@
     <string name="kic_version">KIC OS version</string>
     <string name="kic_pif_server_active">Official dynamic server PIF active</string>
     <string name="kic_keybox_server_active">Official server keybox active</string>
+    <!-- KIC Mods Dashboard Tiles -->
+    <string name="kic_feature_hub_title">Feature Hub</string>
+    <string name="kic_tile_integrity_title">Play Integrity &amp; Keybox</string>
+    <string name="kic_tile_integrity_summary">Dynamic server PIF, hardware keybox &amp; banking targets</string>
+    <string name="kic_tile_per_app_spoof_title">Gaming &amp; Performance Spoofing</string>
+    <string name="kic_tile_per_app_spoof_summary">Unlock 90/120/165 FPS and flagship performance profiles per app</string>
+    <string name="kic_tile_visuals_title">Display &amp; Media Engine</string>
+    <string name="kic_tile_visuals_summary">Sony Reality Display engine &amp; unlimited Google Photos backup</string>
+    <string name="kic_tile_statusbar_title">Status Bar &amp; Interface</string>
+    <string name="kic_tile_statusbar_summary">Network traffic monitor, battery styles, clock &amp; icons</string>
+    <string name="kic_tile_hardware_title">Hardware &amp; Navigation</string>
+    <string name="kic_tile_hardware_summary">Button actions, off-screen gestures &amp; charging control</string>
 </resources>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:key="kic_integrity_screen"
+    android:title="@string/kic_tile_integrity_title">
+
+    <PreferenceCategory
+        android:key="kic_pif_category"
+        android:title="Play Integrity Attestation">
+
+        <SwitchPreferenceCompat
+            android:key="kic_pif_enabled"
+            android:title="@string/kic_pif_enabled_title"
+            android:summary="@string/kic_pif_enabled_summary"
+            android:defaultValue="true" />
+
+        <Preference
+            android:key="kic_pif_import"
+            android:title="@string/kic_pif_import_title"
+            android:summary="@string/kic_pif_import_summary" />
+
+        <Preference
+            android:key="kic_pif_reset"
+            android:title="@string/kic_pif_reset_title"
+            android:summary="@string/kic_pif_reset_summary" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="kic_keybox_category"
+        android:title="Hardware Keybox Attestation">
+
+        <SwitchPreferenceCompat
+            android:key="kic_keybox_enabled"
+            android:title="@string/kic_keybox_enabled_title"
+            android:summary="@string/kic_keybox_enabled_summary"
+            android:defaultValue="true" />
+
+        <Preference
+            android:key="kic_keybox_import"
+            android:title="@string/kic_keybox_import_title"
+            android:summary="@string/kic_keybox_import_summary" />
+
+        <Preference
+            android:key="kic_keybox_reset"
+            android:title="@string/kic_keybox_reset_title"
+            android:summary="@string/kic_keybox_reset_summary" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="kic_targets_category"
+        android:title="Target Applications">
+
+        <Preference
+            android:key="kic_trickystore_targets"
+            android:title="@string/kic_trickystore_targets_title"
+            android:summary="@string/kic_trickystore_targets_summary"
+            android:fragment="com.android.settings.kic.TrickyStoreTargetSettings" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

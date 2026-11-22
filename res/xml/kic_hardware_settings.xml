@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:settings="http://schemas.android.com/apk/res-auto"
+    android:key="kic_hardware_screen"
+    android:title="@string/kic_tile_hardware_title">
+
+    <PreferenceCategory
+        android:key="kic_hardware_category"
+        android:title="Hardware Controls">
+
+        <lineageos.preference.LineagePartsPreference
+            android:key="button_settings"
+            android:title="@string/kic_buttons_title" />
+
+        <lineageos.preference.LineagePartsPreference
+            android:key="touchscreen_gesture_settings"
+            android:title="@string/kic_gestures_title" />
+
+        <lineageos.preference.LineagePartsPreference
+            android:key="charging_control"
+            android:title="@string/kic_charging_title" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

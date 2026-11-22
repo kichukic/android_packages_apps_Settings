@@ -2,103 +2,56 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:settings="http://schemas.android.com/apk/res-auto"
-    android:key="kic_mods_screen"
+    android:key="kic_mods_dashboard"
     android:title="@string/kic_mods_title">
 
     <PreferenceCategory
-        android:key="kic_mods_integrity_category"
-        android:title="@string/kic_mods_integrity_category">
+        android:key="kic_mods_tiles_category"
+        android:title="@string/kic_feature_hub_title">
 
-        <SwitchPreferenceCompat
-            android:key="kic_pif_enabled"
-            android:title="@string/kic_pif_enabled_title"
-            android:summary="@string/kic_pif_enabled_summary"
-            android:defaultValue="true" />
-
+        <!-- Tile 1: Play Integrity & Keybox -->
         <Preference
-            android:key="kic_pif_import"
-            android:title="@string/kic_pif_import_title"
-            android:summary="@string/kic_pif_import_summary" />
+            android:key="kic_tile_integrity"
+            android:title="@string/kic_tile_integrity_title"
+            android:summary="@string/kic_tile_integrity_summary"
+            android:icon="@drawable/ic_settings_security"
+            android:layout="@layout/card_preference_layout"
+            android:fragment="com.android.settings.kic.PlayIntegritySettings" />
 
+        <!-- Tile 2: Gaming & Performance Spoofing -->
         <Preference
-            android:key="kic_pif_reset"
-            android:title="@string/kic_pif_reset_title"
-            android:summary="@string/kic_pif_reset_summary" />
-
-        <SwitchPreferenceCompat
-            android:key="kic_keybox_enabled"
-            android:title="@string/kic_keybox_enabled_title"
-            android:summary="@string/kic_keybox_enabled_summary"
-            android:defaultValue="true" />
-
-        <Preference
-            android:key="kic_keybox_import"
-            android:title="@string/kic_keybox_import_title"
-            android:summary="@string/kic_keybox_import_summary" />
-
-        <Preference
-            android:key="kic_keybox_reset"
-            android:title="@string/kic_keybox_reset_title"
-            android:summary="@string/kic_keybox_reset_summary" />
-
-        <Preference
-            android:key="kic_trickystore_targets"
-            android:title="@string/kic_trickystore_targets_title"
-            android:summary="@string/kic_trickystore_targets_summary"
-            android:fragment="com.android.settings.kic.TrickyStoreTargetSettings" />
-
-    </PreferenceCategory>
-
-    <PreferenceCategory
-        android:key="kic_mods_media_category"
-        android:title="@string/kic_mods_media_category">
-
-        <SwitchPreferenceCompat
-            android:key="kic_gphotos_spoof"
-            android:title="@string/kic_gphotos_spoof_title"
-            android:summary="@string/kic_gphotos_spoof_summary"
-            settings:controller="com.android.settings.kic.GPhotosSpoofPreferenceController" />
-
-        <Preference
-            android:key="kic_per_app_spoof"
-            android:title="@string/kic_per_app_spoof_title"
-            android:summary="@string/kic_per_app_spoof_summary"
+            android:key="kic_tile_gaming"
+            android:title="@string/kic_tile_per_app_spoof_title"
+            android:summary="@string/kic_tile_per_app_spoof_summary"
+            android:icon="@drawable/ic_videogame_vd_theme_24"
+            android:layout="@layout/card_preference_layout"
             android:fragment="com.android.settings.kic.PerAppSpoofSettings" />
 
+        <!-- Tile 3: Display & Media Engine -->
         <Preference
-            android:key="kic_reality_display"
-            android:title="@string/kic_reality_display_title"
-            android:summary="@string/kic_reality_display_summary"
-            android:fragment="com.android.settings.display.ColorModePreferenceFragment" />
+            android:key="kic_tile_visuals"
+            android:title="@string/kic_tile_visuals_title"
+            android:summary="@string/kic_tile_visuals_summary"
+            android:icon="@drawable/ic_settings_display_filled"
+            android:layout="@layout/card_preference_layout"
+            android:fragment="com.android.settings.kic.VisualsMediaSettings" />
 
-    </PreferenceCategory>
-
-    <PreferenceCategory
-        android:key="kic_mods_statusbar_category"
-        android:title="@string/kic_mods_statusbar_category">
-
+        <!-- Tile 4: Status Bar & Interface -->
         <lineageos.preference.LineagePartsPreference
             android:key="status_bar_settings"
-            android:title="@string/kic_status_bar_title"
-            android:summary="@string/kic_status_bar_summary" />
+            android:title="@string/kic_tile_statusbar_title"
+            android:summary="@string/kic_tile_statusbar_summary"
+            android:icon="@drawable/ic_settings_system_dashboard_white"
+            android:layout="@layout/card_preference_layout" />
 
-    </PreferenceCategory>
-
-    <PreferenceCategory
-        android:key="kic_mods_system_category"
-        android:title="@string/kic_mods_system_category">
-
-        <lineageos.preference.LineagePartsPreference
-            android:key="button_settings"
-            android:title="@string/kic_buttons_title" />
-
-        <lineageos.preference.LineagePartsPreference
-            android:key="touchscreen_gesture_settings"
-            android:title="@string/kic_gestures_title" />
-
-        <lineageos.preference.LineagePartsPreference
-            android:key="charging_control"
-            android:title="@string/kic_charging_title" />
+        <!-- Tile 5: Hardware & Navigation -->
+        <Preference
+            android:key="kic_tile_hardware"
+            android:title="@string/kic_tile_hardware_title"
+            android:summary="@string/kic_tile_hardware_summary"
+            android:icon="@drawable/ic_settings_gestures"
+            android:layout="@layout/card_preference_layout"
+            android:fragment="com.android.settings.kic.HardwareGesturesSettings" />
 
     </PreferenceCategory>
 

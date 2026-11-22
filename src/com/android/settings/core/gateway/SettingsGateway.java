@@ -206,6 +206,9 @@ import com.android.settings.support.SupportDashboardActivity;
 import com.android.settings.system.ResetDashboardFragment;
 import com.android.settings.system.ShadePanelsFragment;
 import com.android.settings.kic.KicModsFragment;
+import com.android.settings.kic.PlayIntegritySettings;
+import com.android.settings.kic.VisualsMediaSettings;
+import com.android.settings.kic.HardwareGesturesSettings;
 import com.android.settings.kic.PerAppSpoofSettings;
 import com.android.settings.kic.TrickyStoreTargetSettings;
 import com.android.settings.system.SystemDashboardFragment;
@@ -367,6 +370,9 @@ public class SettingsGateway {
             AutomaticStorageManagerSettings.class.getName(),
             StorageDashboardFragment.class.getName(),
             KicModsFragment.class.getName(),
+            PlayIntegritySettings.class.getName(),
+            VisualsMediaSettings.class.getName(),
+            HardwareGesturesSettings.class.getName(),
             TrickyStoreTargetSettings.class.getName(),
             PerAppSpoofSettings.class.getName(),
             SystemDashboardFragment.class.getName(),
