@@ -47,7 +47,7 @@ class LineageVersionDetailPreference :
         get() = R.string.os_firmware_version_purpose
 
     override val title: Int
-        get() = org.lineageos.platform.internal.R.string.lineage_version
+        get() = R.string.kic_version
 
     override val indexable
         get() = false
@@ -65,8 +65,13 @@ class LineageVersionDetailPreference :
         preference.onPreferenceClickListener = this
     }
 
-    override fun getSummary(context: Context): CharSequence =
-        SystemProperties.get(LINEAGE_VERSION_PROPERTY, context.getString(R.string.unknown));
+    override fun getSummary(context: Context): CharSequence {
+        val kicVersion = SystemProperties.get("ro.kic.version")
+        if (!kicVersion.isNullOrEmpty()) {
+            return kicVersion
+        }
+        return SystemProperties.get(LINEAGE_VERSION_PROPERTY, context.getString(R.string.unknown))
+    }
 
     // return true swallows the click event, while return false will start the intent
     override fun onPreferenceClick(preference: Preference): Boolean {

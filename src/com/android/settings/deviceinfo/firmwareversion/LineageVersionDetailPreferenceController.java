@@ -77,6 +77,10 @@ public class LineageVersionDetailPreferenceController extends BasePreferenceCont
 
     @Override
     public CharSequence getSummary() {
+        String kicVersion = SystemProperties.get("ro.kic.version");
+        if (!TextUtils.isEmpty(kicVersion)) {
+            return kicVersion;
+        }
         return SystemProperties.get(KEY_LINEAGE_VERSION_PROP,
                 mContext.getString(R.string.unknown));
     }

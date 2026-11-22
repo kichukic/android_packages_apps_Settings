@@ -79,4 +79,7 @@
     <string name="kic_buttons_title">Buttons</string>
     <string name="kic_gestures_title">Touchscreen gestures</string>
     <string name="kic_charging_title">Charging control</string>
+    <string name="kic_version">KIC OS version</string>
+    <string name="kic_pif_server_active">Official dynamic server PIF active</string>
+    <string name="kic_keybox_server_active">Official server keybox active</string>
 </resources>
