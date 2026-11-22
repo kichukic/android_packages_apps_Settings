@@ -5,6 +5,7 @@
     <!-- KIC Mods -->
     <string name="kic_mods_title">KIC Mods</string>
     <string name="kic_mods_summary">PIF, Hardware Keybox, Reality Engine, unlimited Google Photos</string>
+
     <!-- Play Integrity & Keybox -->
     <string name="kic_mods_integrity_category">Play Integrity &amp; Keybox</string>
     <string name="kic_pif_enabled_title">Play Integrity spoofing</string>
@@ -36,8 +37,35 @@
     <string name="kic_keybox_empty_error">Selected Keybox file is empty</string>
     <string name="kic_keybox_invalid_error">Invalid Keybox XML format (missing &lt;AndroidAttestationKeyBox&gt;)</string>
 
+    <!-- TrickyStore Target Checklist -->
+    <string name="kic_trickystore_targets_title">Target packages checklist</string>
+    <string name="kic_trickystore_targets_summary">Select banking and financial apps for hardware KeyStore attestation</string>
+    <string name="kic_target_banking_quick_title">Auto-target banking &amp; UPI apps</string>
+    <string name="kic_target_banking_quick_summary">Automatically detect installed banking, wallet, and UPI applications</string>
+    <string name="kic_target_reset_defaults_title">Reset target list to defaults</string>
+    <string name="kic_target_reset_defaults_summary">Restore default stock targets (Google Play, Wallet, Attestation checkers)</string>
+    <string name="kic_category_targeted">Targeted Applications (%1$d)</string>
+    <string name="kic_category_available">Available Applications (%1$d)</string>
+    <string name="kic_menu_hide_system">Hide system apps</string>
+    <string name="kic_menu_show_system">Show system apps</string>
+    <string name="kic_badge_banking">[BANKING / UPI] </string>
+    <string name="kic_target_banking_success">Added %1$d banking app(s) to target list</string>
+    <string name="kic_target_banking_none">No unconfigured banking apps detected</string>
+    <string name="kic_target_reset_confirm">Reset targeted packages to default KIC OS list?</string>
+    <string name="kic_target_reset_success">Target list reset to default</string>
+
+    <!-- Per-App Device Spoofing -->
+    <string name="kic_per_app_spoof_title">Per-app device spoofing</string>
+    <string name="kic_per_app_spoof_summary">Spoof flagship gaming profiles per application to unlock 90/120/165 FPS</string>
+    <string name="kic_per_app_spoof_master_title">Enable per-app spoofing</string>
+    <string name="kic_per_app_spoof_master_summary">Override device model and manufacturer properties for selected apps</string>
+    <string name="kic_category_configured">Configured Applications (%1$d)</string>
+    <string name="kic_category_all_apps">All Applications (%1$d)</string>
+    <string name="kic_profile_default">Default (No Spoofing)</string>
+    <string name="kic_per_app_spoof_applied">Device spoof profile updated</string>
+
     <!-- Media & Visuals -->
-    <string name="kic_mods_media_category">Visuals &amp; Media</string>
+    <string name="kic_mods_media_category">Visuals &amp; Gaming</string>
     <string name="kic_gphotos_spoof_title">Google Photos unlimited storage</string>
     <string name="kic_gphotos_spoof_summary">Spoof device as Pixel XL (marlin) for unlimited original quality backup</string>
     <string name="kic_reality_display_title">Reality Display Engine</string>

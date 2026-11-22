@@ -41,6 +41,12 @@
             android:title="@string/kic_keybox_reset_title"
             android:summary="@string/kic_keybox_reset_summary" />
 
+        <Preference
+            android:key="kic_trickystore_targets"
+            android:title="@string/kic_trickystore_targets_title"
+            android:summary="@string/kic_trickystore_targets_summary"
+            android:fragment="com.android.settings.kic.TrickyStoreTargetSettings" />
+
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -52,6 +58,12 @@
             android:title="@string/kic_gphotos_spoof_title"
             android:summary="@string/kic_gphotos_spoof_summary"
             settings:controller="com.android.settings.kic.GPhotosSpoofPreferenceController" />
+
+        <Preference
+            android:key="kic_per_app_spoof"
+            android:title="@string/kic_per_app_spoof_title"
+            android:summary="@string/kic_per_app_spoof_summary"
+            android:fragment="com.android.settings.kic.PerAppSpoofSettings" />
 
         <Preference
             android:key="kic_reality_display"

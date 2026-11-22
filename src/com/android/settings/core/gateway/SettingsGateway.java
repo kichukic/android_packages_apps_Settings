@@ -206,6 +206,8 @@ import com.android.settings.support.SupportDashboardActivity;
 import com.android.settings.system.ResetDashboardFragment;
 import com.android.settings.system.ShadePanelsFragment;
 import com.android.settings.kic.KicModsFragment;
+import com.android.settings.kic.PerAppSpoofSettings;
+import com.android.settings.kic.TrickyStoreTargetSettings;
 import com.android.settings.system.SystemDashboardFragment;
 import com.android.settings.tts.TextToSpeechSettings;
 import com.android.settings.users.UserSettings;
@@ -365,6 +367,8 @@ public class SettingsGateway {
             AutomaticStorageManagerSettings.class.getName(),
             StorageDashboardFragment.class.getName(),
             KicModsFragment.class.getName(),
+            TrickyStoreTargetSettings.class.getName(),
+            PerAppSpoofSettings.class.getName(),
             SystemDashboardFragment.class.getName(),
             NetworkDashboardFragment.class.getName(),
             ConnectedDeviceDashboardFragment.class.getName(),
