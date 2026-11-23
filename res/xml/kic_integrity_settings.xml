@@ -16,6 +16,11 @@
             android:defaultValue="true" />
 
         <Preference
+            android:key="kic_pif_fetch"
+            android:title="@string/kic_pif_fetch_title"
+            android:summary="@string/kic_pif_fetch_summary" />
+
+        <Preference
             android:key="kic_pif_import"
             android:title="@string/kic_pif_import_title"
             android:summary="@string/kic_pif_import_summary" />
@@ -36,6 +41,11 @@
             android:title="@string/kic_keybox_enabled_title"
             android:summary="@string/kic_keybox_enabled_summary"
             android:defaultValue="true" />
+
+        <Preference
+            android:key="kic_keybox_fetch"
+            android:title="@string/kic_keybox_fetch_title"
+            android:summary="@string/kic_keybox_fetch_summary" />
 
         <Preference
             android:key="kic_keybox_import"

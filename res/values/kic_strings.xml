@@ -94,4 +94,17 @@
     <string name="kic_tile_statusbar_summary">Network traffic monitor, battery styles, clock &amp; icons</string>
     <string name="kic_tile_hardware_title">Hardware &amp; Navigation</string>
     <string name="kic_tile_hardware_summary">Button actions, off-screen gestures &amp; charging control</string>
+
+    <!-- PIF & Keybox Server Fetch -->
+    <string name="kic_pif_fetch_title">Fetch latest PIF from server</string>
+    <string name="kic_pif_fetch_summary">Download and apply latest verified Play Integrity profile from RisingOS server</string>
+    <string name="kic_pif_fetching">Fetching latest PIF profile from server...</string>
+    <string name="kic_pif_fetch_success">Play Integrity profile updated: %1$s</string>
+    <string name="kic_pif_fetch_failed">Failed to fetch PIF profile: %1$s</string>
+
+    <string name="kic_keybox_fetch_title">Fetch official Keybox from server</string>
+    <string name="kic_keybox_fetch_summary">Download and apply official Hardware Keybox from Evolution-X server</string>
+    <string name="kic_keybox_fetching">Fetching official Hardware Keybox from server...</string>
+    <string name="kic_keybox_fetch_success">Official Hardware Keybox fetched and applied successfully</string>
+    <string name="kic_keybox_fetch_failed">Failed to fetch Keybox: %1$s</string>
 </resources>
