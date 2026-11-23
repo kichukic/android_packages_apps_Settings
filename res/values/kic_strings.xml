@@ -107,4 +107,13 @@
     <string name="kic_keybox_fetching">Fetching official Hardware Keybox from server...</string>
     <string name="kic_keybox_fetch_success">Official Hardware Keybox fetched and applied successfully</string>
     <string name="kic_keybox_fetch_failed">Failed to fetch Keybox: %1$s</string>
+
+    <!-- Pixel Device Picker Strings -->
+    <string name="kic_pif_select_device_title">Select Google Pixel model</string>
+    <string name="kic_pif_recommended_suffix">Recommended</string>
+    <string name="kic_pif_fetching_devices">Fetching available Pixel profiles...</string>
+    <string name="kic_pif_wipe_title">Refresh Play Store attestation</string>
+    <string name="kic_pif_wipe_message">Would you like to clear Google Play Store data? This forces Play Store to immediately request a fresh Play Integrity verdict using the new fingerprint.</string>
+    <string name="kic_pif_wipe_action">Clear data &amp; restart</string>
+    <string name="kic_pif_wipe_cancel">Later</string>
 </resources>

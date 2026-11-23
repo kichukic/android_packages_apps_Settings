@@ -26,6 +26,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.SystemProperties;
 import android.provider.SearchIndexableResource;
 import android.provider.Settings;
 import android.security.trickystore.KeyBoxManager;
@@ -53,7 +54,10 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -81,9 +85,6 @@ public class PlayIntegritySettings extends DashboardFragment implements Preferen
     private static final String SETTING_SPOOF_TRICKYSTORE_KEYBOX = "spoof_trickystore_keybox";
     private static final String SETTING_SPOOF_TRICKYSTORE_ENABLED = "spoof_trickystore_enabled";
     private static final String SETTING_KEYBOX_SOURCE = "spoof_trickystore_keybox_source";
-
-    private static final String OFFICIAL_PIF_URL =
-            "https://raw.githubusercontent.com/RisingOS-Revived/risingOS_wiki/refs/heads/fifteen/spoofing/PlayIntergrity/pif.json";
 
     private static final String[] OFFICIAL_KEYBOX_URLS = {
             "https://gitea.com/Evolution-X/keybox/raw/branch/main/keybox.xml",
@@ -172,7 +173,7 @@ public class PlayIntegritySettings extends DashboardFragment implements Preferen
             if (!TextUtils.isEmpty(pif) && !isManualPif) {
                 mPifFetchPref.setSummary(getString(R.string.kic_pif_server_active)
                         + (model != null ? " (" + model + ")" : "")
-                        + " — Tap to re-fetch latest");
+                        + " \u2014 Tap to choose Pixel model");
             } else {
                 mPifFetchPref.setSummary(getString(R.string.kic_pif_fetch_summary));
             }
@@ -193,7 +194,7 @@ public class PlayIntegritySettings extends DashboardFragment implements Preferen
         if (mKeyboxFetchPref != null) {
             if (!TextUtils.isEmpty(keybox) && "official".equals(source)) {
                 mKeyboxFetchPref.setSummary(getString(R.string.kic_keybox_server_active)
-                        + " — Tap to re-fetch official XML");
+                        + " \u2014 Tap to re-fetch official XML");
             } else {
                 mKeyboxFetchPref.setSummary(getString(R.string.kic_keybox_fetch_summary));
             }
@@ -254,72 +255,69 @@ public class PlayIntegritySettings extends DashboardFragment implements Preferen
     private void fetchPifFromServer() {
         Context ctx = getContext();
         if (ctx == null) return;
-        Toast.makeText(ctx, R.string.kic_pif_fetching, Toast.LENGTH_SHORT).show();
+        Toast.makeText(ctx, R.string.kic_pif_fetching_devices, Toast.LENGTH_SHORT).show();
 
         mExecutor.execute(() -> {
             try {
-                String jsonStr = null;
-                // 1. Try fetching from RisingOS official wiki
-                try {
-                    URL url = new URL(OFFICIAL_PIF_URL);
-                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                    conn.setConnectTimeout(8000);
-                    conn.setReadTimeout(8000);
-                    if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
-                        try (InputStream is = conn.getInputStream()) {
-                            jsonStr = new String(is.readAllBytes(), StandardCharsets.UTF_8);
-                        }
+                List<PixelDeviceRepository.PixelProfile> profiles =
+                        PixelDeviceRepository.getProfiles(ctx, true);
+                if (profiles == null || profiles.isEmpty()) {
+                    profiles = PixelDeviceRepository.FALLBACK_PROFILES;
+                }
+
+                final List<PixelDeviceRepository.PixelProfile> sortedProfiles = new ArrayList<>(profiles);
+                final String defaultCodename = PixelDeviceRepository.getDefaultPifCodename(sortedProfiles);
+                final String currentDevice = SystemProperties.get("ro.product.device", "");
+
+                sortedProfiles.sort((a, b) -> {
+                    if (defaultCodename.equals(a.codename) && !defaultCodename.equals(b.codename)) return -1;
+                    if (!defaultCodename.equals(a.codename) && defaultCodename.equals(b.codename)) return 1;
+                    if (currentDevice.equals(a.device) && !currentDevice.equals(b.device)) return -1;
+                    if (!currentDevice.equals(a.device) && currentDevice.equals(b.device)) return 1;
+                    int idxA = PixelDeviceRepository.PICKER_ORDER.indexOf(a.codename);
+                    int idxB = PixelDeviceRepository.PICKER_ORDER.indexOf(b.codename);
+                    if (idxA < 0) idxA = Integer.MAX_VALUE;
+                    if (idxB < 0) idxB = Integer.MAX_VALUE;
+                    return Integer.compare(idxA, idxB);
+                });
+
+                String currentSpoofedDevice = null;
+                String pifConfig = Settings.Secure.getString(ctx.getContentResolver(), SETTING_SPOOF_PIF_CONFIG);
+                if (!TextUtils.isEmpty(pifConfig)) {
+                    try {
+                        currentSpoofedDevice = new JSONObject(pifConfig).optString("DEVICE", null);
+                    } catch (Exception ignored) {}
+                }
+
+                final String[] modelNames = new String[sortedProfiles.size()];
+                int preselectedIndex = 0;
+                for (int i = 0; i < sortedProfiles.size(); i++) {
+                    PixelDeviceRepository.PixelProfile p = sortedProfiles.get(i);
+                    if (currentSpoofedDevice != null && currentSpoofedDevice.equals(p.device)) {
+                        preselectedIndex = i;
+                    } else if (currentSpoofedDevice == null && defaultCodename.equals(p.codename)) {
+                        preselectedIndex = i;
                     }
-                    conn.disconnect();
-                } catch (Exception e) {
-                    Log.w(TAG, "RisingOS wiki PIF fetch failed, falling back to PixelDeviceRepository", e);
-                }
-
-                // 2. Fallback to PixelDeviceRepository if wiki fetch failed or is invalid
-                if (TextUtils.isEmpty(jsonStr) || !isValidPifJson(jsonStr)) {
-                    List<PixelDeviceRepository.PixelProfile> profiles =
-                            PixelDeviceRepository.getProfiles(ctx, true);
-                    String codename = PixelDeviceRepository.getDefaultPifCodename(profiles);
-                    PixelDeviceRepository.PixelProfile matched =
-                            PixelDeviceRepository.getProfileByCodename(ctx, codename, false);
-                    if (matched != null && PixelDeviceRepository.isValidFingerprint(matched.fingerprint)) {
-                        JSONObject obj = new JSONObject();
-                        String brandCap = (matched.brand != null && !matched.brand.isEmpty())
-                                ? Character.toUpperCase(matched.brand.charAt(0)) + matched.brand.substring(1)
-                                : "Google";
-                        obj.put("MANUFACTURER", brandCap);
-                        obj.put("BRAND", matched.brand);
-                        obj.put("MODEL", matched.model);
-                        obj.put("PRODUCT", matched.product);
-                        obj.put("DEVICE", matched.device);
-                        obj.put("FINGERPRINT", matched.fingerprint);
-                        obj.put("SECURITY_PATCH", matched.securityPatch);
-                        obj.put("DEVICE_INITIAL_SDK_INT", PixelDeviceRepository.getInitialSdkInt(matched.device));
-                        obj.put("manually_imported", false);
-                        jsonStr = obj.toString(2);
+                    if (defaultCodename.equals(p.codename)) {
+                        modelNames[i] = p.model + " \u2014 " + getString(R.string.kic_pif_recommended_suffix);
+                    } else {
+                        modelNames[i] = p.model + (p.isCanary ? " (Canary)" : "");
                     }
                 }
 
-                if (TextUtils.isEmpty(jsonStr) || !isValidPifJson(jsonStr)) {
-                    throw new IOException("Could not obtain a valid PIF configuration from server");
-                }
-
-                JSONObject pifJson = new JSONObject(jsonStr);
-                pifJson.put("manually_imported", false);
-                String formatted = pifJson.toString(2);
-                String model = pifJson.optString("MODEL", "Pixel");
-
-                Settings.Secure.putString(ctx.getContentResolver(), SETTING_SPOOF_PIF_CONFIG, formatted);
-                Settings.Secure.putLong(ctx.getContentResolver(), "spoof_pif_last_auto_fetch", 0L);
-
-                restartGms(ctx);
-
+                final int finalPreselectedIndex = preselectedIndex;
                 mMainHandler.post(() -> {
-                    Toast.makeText(ctx, getString(R.string.kic_pif_fetch_success, model), Toast.LENGTH_LONG).show();
-                    updateSummariesAndSwitches();
+                    new AlertDialog.Builder(ctx)
+                            .setTitle(R.string.kic_pif_select_device_title)
+                            .setSingleChoiceItems(modelNames, finalPreselectedIndex, (dialog, which) -> {
+                                dialog.dismiss();
+                                applySelectedPixelProfile(sortedProfiles.get(which));
+                            })
+                            .setNegativeButton(android.R.string.cancel, null)
+                            .show();
                 });
             } catch (Exception e) {
-                Log.e(TAG, "Failed to fetch PIF from server", e);
+                Log.e(TAG, "Failed to fetch device profiles", e);
                 mMainHandler.post(() -> {
                     Toast.makeText(ctx, getString(R.string.kic_pif_fetch_failed,
                             e.getMessage() != null ? e.getMessage() : "Network error"), Toast.LENGTH_SHORT).show();
@@ -328,14 +326,75 @@ public class PlayIntegritySettings extends DashboardFragment implements Preferen
         });
     }
 
-    private boolean isValidPifJson(String content) {
-        try {
-            JSONObject obj = new JSONObject(content);
-            String fp = obj.optString("FINGERPRINT", "");
-            return !TextUtils.isEmpty(fp) && PixelDeviceRepository.isValidFingerprint(fp);
-        } catch (Exception e) {
-            return false;
+    private void applySelectedPixelProfile(PixelDeviceRepository.PixelProfile profile) {
+        Context ctx = getContext();
+        if (ctx == null || profile == null) return;
+
+        if (!PixelDeviceRepository.isValidFingerprint(profile.fingerprint)) {
+            Toast.makeText(ctx, getString(R.string.kic_pif_fetch_failed, "Invalid fingerprint"), Toast.LENGTH_SHORT).show();
+            return;
         }
+
+        mExecutor.execute(() -> {
+            try {
+                JSONObject pifJson = new JSONObject();
+                String brandCap = (profile.brand != null && !profile.brand.isEmpty())
+                        ? Character.toUpperCase(profile.brand.charAt(0)) + profile.brand.substring(1)
+                        : "Google";
+                pifJson.put("MANUFACTURER", brandCap);
+                pifJson.put("BRAND", profile.brand);
+                pifJson.put("MODEL", profile.model);
+                pifJson.put("PRODUCT", profile.product);
+                pifJson.put("DEVICE", profile.device);
+                pifJson.put("FINGERPRINT", profile.fingerprint);
+                pifJson.put("SECURITY_PATCH", profile.securityPatch);
+                pifJson.put("DEVICE_INITIAL_SDK_INT", PixelDeviceRepository.getInitialSdkInt(profile.device));
+                if (profile.isCanary && profile.securityPatch != null && profile.securityPatch.length() >= 7) {
+                    pifJson.put("_canary_month", profile.securityPatch.substring(0, 7));
+                    if (profile.releaseDate != null) {
+                        pifJson.put("_canary_release_date", profile.releaseDate);
+                    }
+                }
+                pifJson.put("manually_imported", false);
+
+                Settings.Secure.putString(ctx.getContentResolver(), SETTING_SPOOF_PIF_CONFIG, pifJson.toString(2));
+                Settings.Secure.putLong(ctx.getContentResolver(), "spoof_pif_last_auto_fetch", 0L);
+                if (!TextUtils.isEmpty(profile.securityPatch)) {
+                    Settings.Secure.putString(ctx.getContentResolver(), "spoof_trickystore_patch", profile.securityPatch);
+                }
+
+                restartGms(ctx);
+
+                mMainHandler.post(() -> {
+                    Toast.makeText(ctx, getString(R.string.kic_pif_fetch_success, profile.model), Toast.LENGTH_LONG).show();
+                    updateSummariesAndSwitches();
+                    showWipePlayStoreDialog();
+                });
+            } catch (Exception e) {
+                Log.e(TAG, "Failed to apply Pixel profile", e);
+                mMainHandler.post(() -> {
+                    Toast.makeText(ctx, getString(R.string.kic_pif_fetch_failed, e.getMessage()), Toast.LENGTH_SHORT).show();
+                });
+            }
+        });
+    }
+
+    private void showWipePlayStoreDialog() {
+        Context ctx = getContext();
+        if (ctx == null) return;
+        new AlertDialog.Builder(ctx)
+                .setTitle(R.string.kic_pif_wipe_title)
+                .setMessage(R.string.kic_pif_wipe_message)
+                .setPositiveButton(R.string.kic_pif_wipe_action, (dialog, which) -> {
+                    try {
+                        ctx.getPackageManager().clearApplicationUserData("com.android.vending", null);
+                        Toast.makeText(ctx, "Play Store cache cleared", Toast.LENGTH_SHORT).show();
+                    } catch (Exception e) {
+                        Log.w(TAG, "Failed to clear Play Store data", e);
+                    }
+                })
+                .setNegativeButton(R.string.kic_pif_wipe_cancel, null)
+                .show();
     }
 
     private void fetchKeyboxFromServer() {
